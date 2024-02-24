@@ -1,6 +1,18 @@
 # p5visualizer
 競プロ用。C++コードに描画コマンドを埋め込み、ファイルを出力し、それをブラウザ上で表示させる
 
+# 特徴
+提出コードに、描画小面戸が埋め込めるので、簡単！
+- ビジュアライザ用の提出コード用で、スコア判定などを2回書かずに済む
+- 提出コードの一時変数を表示させたいときに、直接描画できるので便利
+- p5.jsに準拠しているので、それなりに機能も豊富
+
+コード
+![image](https://github.com/shindannin/p5visualizer/assets/8682966/e6c0f8a0-d079-4e4e-b352-a9ffc9f6533c)
+
+ビジュアライズ
+![image](https://github.com/shindannin/p5visualizer/assets/8682966/f12b250d-208f-4f07-b8cc-902696f0ae24)
+
 # 使用方法
 1. 自分のmain.cppに、macro.cppを挿入する。
 2. main.cppに描画コマンドを書いていく。

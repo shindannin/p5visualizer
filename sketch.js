@@ -1,4 +1,4 @@
-let startTimeSlider; //, endTimeSlider;
+let startTimeSlider; // スライダー
 let maxTime = 0; // timeの最大値を格納する変数
 let commands = []; // コマンドを格納する配列
 let numDrawCommands = 0; // 描画したコマンド数
@@ -24,7 +24,8 @@ function setup() {
         } else {
             alert("ファイルがまだ選択されていません。");
         }
-    });}
+    });
+}
 
 function draw() {
     clear();
@@ -77,16 +78,11 @@ function parseCommands(fileContent) {
 function createSliders() {
     // 既存のスライダーを削除
     if (startTimeSlider) startTimeSlider.remove();
- //   if (endTimeSlider) endTimeSlider.remove();
     
     // 新しいスライダーを生成
     startTimeSlider = createSlider(0, maxTime, 0, 1);
     startTimeSlider.position(100, height);
     startTimeSlider.input(() => redraw()); // スライダーが更新されたときにredrawを呼ぶ
-    
-//    endTimeSlider = createSlider(0, maxTime, maxTime, 1);
-//    endTimeSlider.position(10, height + 50);
-//    endTimeSlider.input(() => redraw()); // スライダーが更新されたときにredrawを呼ぶ
 }
 
 function executeCommands() {
@@ -96,13 +92,13 @@ function executeCommands() {
     }
 
     const startTime = startTimeSlider.value();
-    const endTime = startTime;     // const endTime = endTimeSlider.value();
+    const endTime = startTime;
 
     // 時間の条件を満たすコマンド文字列を連結
     let commandsToExecute = '';
     numDrawCommands = 0;
     commands.forEach(({time, cmd}) => {
-        if ( (time >= startTime && time <= endTime) || time < 0) {
+        if ( (startTime <= time && time <= endTime) || time < 0) { // time = -1は常に描画
             commandsToExecute += cmd + ';';
             numDrawCommands += 1;
         }

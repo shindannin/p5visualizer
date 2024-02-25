@@ -34,10 +34,25 @@ function setup() {
     });
 
     // スライダーの設定部分
+    // スライダーの値が変更されたときにテキストボックスを更新
     let timeSlider = document.getElementById('timeSlider');
     timeSlider.addEventListener('input', function() {
+        document.getElementById('currentTimeInput').value = this.value;
         if (!playing) {
             redraw(); // スライダーが手動で操作されたときに描画を更新
+        }
+    });
+
+    // テキストボックスの値が変更されたときにスライダーの値を更新
+    let currentTimeInput = document.getElementById('currentTimeInput');
+    currentTimeInput.addEventListener('input', function() {
+        let value = parseInt(this.value);
+        if (!isNaN(value)) {
+            value = Math.min(Math.max(value, 0), maxTime); // 範囲内に収める
+            timeSlider.value = value;
+            if (!playing) {
+                redraw(); // テキストボックスが手動で操作されたときに描画を更新
+            }
         }
     });
 
@@ -73,7 +88,8 @@ function draw() {
             noLoop(); // drawループを停止
         }
         timeSlider.value = nextTime; // スライダーの値を更新
-    }
+        document.getElementById('currentTimeInput').value = nextTime; // テキストボックスも更新
+   }
 
     // 描画コマンドの実行
     executeCommands();

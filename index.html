@@ -17,8 +17,8 @@
     <div id="inputContainer">
         <input type="file" id="fileInput">
         <input type="range" id="timeSlider" min="0" max="100" value="0">
-        <span id="maxTimeDisplay"></span> <!-- 最大値を表示するためのスパン -->
-            <button id="playButton">再生</button>
+        <input type="text" id="currentTimeInput" value="0" size="4"> / <span id="maxTimeDisplay">0</span>
+        <button id="playButton">再生</button>
         再生速度：<input type="text" id="playSpeed" value="1" size="3">
     </div>
     <div id="canvasContainer"></div>

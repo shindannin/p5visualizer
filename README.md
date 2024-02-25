@@ -11,7 +11,7 @@
 ![image](https://github.com/shindannin/p5visualizer/assets/8682966/e6c0f8a0-d079-4e4e-b352-a9ffc9f6533c)
 
 ## ビジュアライズの例
-![image](https://github.com/shindannin/p5visualizer/assets/8682966/f12b250d-208f-4f07-b8cc-902696f0ae24)
+![image](https://github.com/shindannin/p5visualizer/assets/8682966/3169e0d4-020b-40a7-9869-76b2ebb157eb)
 
 # 使用方法
 1. 自分のmain.cppに、macro.cppを挿入する。

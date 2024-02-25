@@ -1,15 +1,24 @@
-let startTimeSlider; // スライダー
 let maxTime = 0; // timeの最大値を格納する変数
 let commands = []; // コマンドを格納する配列
 let numDrawCommands = 0; // 描画したコマンド数
 let lastFile; // 最後に選択されたファイルの内容を保存する変数
 let playButton, playSpeedInput;
 let playing = false; // 再生中かどうかのフラグ
-let playSpeed = 1; // 再生速度 (FPS)
+let playSpeed = 1; // 再生速度（スライダーのvalueを進める速度）
+
+// スライダーの最大値を更新するグローバル関数
+window.updateMaxTime = function(maxTime) {
+    document.getElementById('timeSlider').max = maxTime;
+};
+
+// 現在のスライダーの値を更新するグローバル関数
+window.updateSliderValue = function(value) {
+    document.getElementById('timeSlider').value = value;
+};
 
 function setup() {
-    createCanvas(800, 800);
-    noLoop(); // 描画ループを無効にする
+    createCanvas(800, 800).parent('canvasContainer'); // キャンバスの親要素を設定
+    noLoop();
 
     // ファイル入力処理
     document.getElementById('fileInput').addEventListener('change', function(e) {
@@ -19,19 +28,26 @@ function setup() {
             readFile(lastFile);
         }
     });
-    
-    document.getElementById('reloadButton').addEventListener('click', function() {
-        if (lastFile) {
-            // リロードボタンが押されたとき、最後に選択されたファイルを再読み込み
-            readFile(lastFile);
-        } else {
-            alert("ファイルがまだ選択されていません。");
+
+    document.getElementById('fileInput').addEventListener('click', function(e) {
+        this.value = null;
+    });
+
+    // スライダーの設定部分
+    let timeSlider = document.getElementById('timeSlider');
+    timeSlider.addEventListener('input', function() {
+        if (!playing) {
+            redraw(); // スライダーが手動で操作されたときに描画を更新
         }
     });
 
-    // 再生ボタンのセットアップ
-    playButton = select('#playButton');
-    playButton.mousePressed(togglePlay);
+    // 再生速度の設定（テキストボックスから値を取得）
+    document.getElementById('playSpeed').addEventListener('input', function() {
+        playSpeed = parseInt(this.value); // 再生速度を更新
+    });
+
+    // 再生ボタンのクリックイベントをHTML側で扱う
+    document.getElementById('playButton').addEventListener('click', togglePlay);
 
     // 再生速度設定のセットアップ
     playSpeedInput = select('#playSpeed');
@@ -44,37 +60,44 @@ function draw() {
     clear();
     background('white');
 
+    if (playing) {
+        loop();
+        // 描画コマンドの実行とその他の描画処理...
+        let timeSlider = document.getElementById('timeSlider');
+        const currentTime = parseInt(timeSlider.value);
+        let nextTime = currentTime + playSpeed; // 次の時間を計算
+        timeSlider.value = nextTime; // スライダーの値を更新
+        if (nextTime >= maxTime) {
+            nextTime = maxTime;
+            playing = false; // 最大値に達したら再生を停止
+            noLoop(); // drawループを停止
+        }
+        timeSlider.value = nextTime; // スライダーの値を更新
+    }
+
     // 描画コマンドの実行
     executeCommands();
 
     // 全描画コマンド数と表示描画コマンド数の表示
+    /*
     fill(0); // テキストの色を黒に設定
     textSize(12); // テキストサイズの設定
     text(`描画コマンド数: ${numDrawCommands}/${commands.length}`, 10, height - 20);
-
-    if (startTimeSlider) {
-        const startTime = startTimeSlider.value();
-        text(`時間: ${startTime}/${maxTime}`, 10, height - 40);
-    }
-
-    if (playing) {
-        const currentTime = startTimeSlider.value();
-        const nextTime = min(currentTime + playSpeed, maxTime); // 次の時間を計算
-        startTimeSlider.value(nextTime); // スライダーの値を更新
-        if (currentTime >= maxTime) {
-            playing = false; // 最大値に達したら再生を停止
-        }
-        redraw(); // 描画を更新
-    }
+    */
 }   
 
 function readFile(file) {
     const reader = new FileReader();
     reader.onload = function(event) {
         parseCommands(event.target.result);
-        createSliders(); // スライダーを生成
-        redraw();
+        // スライダーの最大値と現在値を更新
+        let timeSlider = document.getElementById('timeSlider');
+        timeSlider.max = maxTime;
+        timeSlider.value = 0; // スライダーの値をリセット
+        document.getElementById('maxTimeDisplay').innerText = `最大時間: ${maxTime}`; // 最大時間の表示を更新
+        redraw(); // キャンバスを更新
     };
+
     reader.readAsText(file);
 }
 
@@ -95,26 +118,17 @@ function parseCommands(fileContent) {
             commands.push({ time: currentTime, cmd: trimmedCommand });
         }
     });
-}
 
-function createSliders() {
-    // 既存のスライダーを削除
-    if (startTimeSlider) startTimeSlider.remove();
-    
-    // 新しいスライダーを生成
-    startTimeSlider = createSlider(0, maxTime, 0, 1);
-    startTimeSlider.position(100, height);
-    startTimeSlider.input(() => redraw()); // スライダーが更新されたときにredrawを呼ぶ
+    timeSlider.max = maxTime;
+    // 最大値を表示
+    document.getElementById('maxTimeDisplay').innerText = `最大時間: ${maxTime}`;
 }
 
 function executeCommands() {
-    if (!startTimeSlider) {
-        console.log("スライダーがまだ存在しません。");
-        return; // スライダーがない場合はここで処理を終了
-    }
-
-    const startTime = startTimeSlider.value();
-    const endTime = startTime;
+    let timeSlider = document.getElementById('timeSlider');
+    const currentTime = parseInt(timeSlider.value);
+    const startTime = currentTime;
+    const endTime = currentTime;
 
     // 時間の条件を満たすコマンド文字列を連結
     let commandsToExecute = '';
@@ -131,7 +145,7 @@ function executeCommands() {
     }
 }
 
-// 再生/停止の切り替え
+// 再生/停止の切り替え関数
 function togglePlay() {
     playing = !playing;
     if (playing) {

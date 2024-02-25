@@ -1,0 +1,68 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f2f2f2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#inputContainer {
+    display: flex;
+    justify-content: space-between; /* コンテナ内のスペースを均等に分散 */
+    align-items: center;
+    width: 780px; /* キャンバス幅に合わせて調整 */
+    padding: 10px;
+    margin-bottom: 20px; /* キャンバスとの隙間を確保 */
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.button {
+    background-color: #007bff;
+    color: white;
+    padding: 6px 10px; /* ボタンのパディングを調整 */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1.0; /* ボタンの縦の長さをテキストボックスに合わせる */
+    margin: 0 5px; /* ボタンの左右のマージンを調整 */
+}
+
+.slider-container {
+    display: flex;
+    align-items: center;
+}
+
+#timeSlider {
+    width: 300px; /* スライダーの幅を調整 */
+}
+
+#currentTimeInput,
+#playSpeed {
+    border: 1px solid #ccc;
+    padding: 2px 2px; /* テキストボックスのパディングを調整 */
+    text-align: center;
+    border-radius: 4px;
+    width: 50px; /* テキストボックスの幅を調整 */
+    line-height: 1.5; /* テキストボックスの縦の長さを調整 */
+    margin: 0 5px; /* テキストボックスの左右のマージンを調整 */
+}
+
+#canvasContainer {
+    width: 800px; /* キャンバスコンテナの幅を固定 */
+    background-color: #eaeaea; /* 背景色を設定 */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden; /* キャンバスの枠を超えた描画を非表示に */
+}
+
+.speed-control {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    margin: 0 5px; /* スピードコントロールの左右のマージンを調整 */
+}

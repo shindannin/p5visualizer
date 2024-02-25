@@ -110,7 +110,7 @@ function readFile(file) {
         let timeSlider = document.getElementById('timeSlider');
         timeSlider.max = maxTime;
         timeSlider.value = 0; // スライダーの値をリセット
-        document.getElementById('maxTimeDisplay').innerText = `最大時間: ${maxTime}`; // 最大時間の表示を更新
+        document.getElementById('maxTimeDisplay').innerText = `${maxTime}`; // 最大時間の表示を更新
         redraw(); // キャンバスを更新
     };
 
@@ -137,7 +137,7 @@ function parseCommands(fileContent) {
 
     timeSlider.max = maxTime;
     // 最大値を表示
-    document.getElementById('maxTimeDisplay').innerText = `最大時間: ${maxTime}`;
+    document.getElementById('maxTimeDisplay').innerText = `${maxTime}`;
 }
 
 function executeCommands() {

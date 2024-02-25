@@ -64,6 +64,9 @@ function setup() {
     // 再生ボタンのクリックイベントをHTML側で扱う
     document.getElementById('playButton').addEventListener('click', togglePlay);
 
+    // GIF録画ボタンのイベントリスナーを追加
+    document.getElementById('recordGifButton').addEventListener('click', recordGif);
+
     // 再生速度設定のセットアップ
     playSpeedInput = select('#playSpeed');
     playSpeedInput.input(() => {
@@ -169,4 +172,9 @@ function togglePlay() {
     } else {
         noLoop(); // drawループを停止
     }
+}
+
+// GIF録画関数
+function recordGif() {
+    saveGif('mySketch', 5);
 }

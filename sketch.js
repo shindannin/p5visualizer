@@ -3,6 +3,9 @@ let maxTime = 0; // timeの最大値を格納する変数
 let commands = []; // コマンドを格納する配列
 let numDrawCommands = 0; // 描画したコマンド数
 let lastFile; // 最後に選択されたファイルの内容を保存する変数
+let playButton, playSpeedInput;
+let playing = false; // 再生中かどうかのフラグ
+let playSpeed = 1; // 再生速度 (FPS)
 
 function setup() {
     createCanvas(800, 800);
@@ -25,6 +28,16 @@ function setup() {
             alert("ファイルがまだ選択されていません。");
         }
     });
+
+    // 再生ボタンのセットアップ
+    playButton = select('#playButton');
+    playButton.mousePressed(togglePlay);
+
+    // 再生速度設定のセットアップ
+    playSpeedInput = select('#playSpeed');
+    playSpeedInput.input(() => {
+        playSpeed = float(playSpeedInput.value());
+    });
 }
 
 function draw() {
@@ -44,6 +57,15 @@ function draw() {
         text(`時間: ${startTime}/${maxTime}`, 10, height - 40);
     }
 
+    if (playing) {
+        const currentTime = startTimeSlider.value();
+        const nextTime = min(currentTime + playSpeed, maxTime); // 次の時間を計算
+        startTimeSlider.value(nextTime); // スライダーの値を更新
+        if (currentTime >= maxTime) {
+            playing = false; // 最大値に達したら再生を停止
+        }
+        redraw(); // 描画を更新
+    }
 }   
 
 function readFile(file) {
@@ -106,5 +128,15 @@ function executeCommands() {
     
     if (commandsToExecute) {
         eval(commandsToExecute); // 連結されたコマンドをevalで1回だけ評価
+    }
+}
+
+// 再生/停止の切り替え
+function togglePlay() {
+    playing = !playing;
+    if (playing) {
+        loop(); // drawループを有効にして描画を続ける
+    } else {
+        noLoop(); // drawループを停止
     }
 }

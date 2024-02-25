@@ -2,6 +2,7 @@ let startTimeSlider; //, endTimeSlider;
 let maxTime = 0; // timeの最大値を格納する変数
 let commands = []; // コマンドを格納する配列
 let numDrawCommands = 0; // 描画したコマンド数
+let lastFile; // 最後に選択されたファイルの内容を保存する変数
 
 function setup() {
     createCanvas(800, 800);
@@ -9,12 +10,21 @@ function setup() {
 
     // ファイル入力処理
     document.getElementById('fileInput').addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        if (file) {
-            readFile(file);
+        if (e.target.files.length > 0) {
+            // ファイルが選択されたとき、そのファイルを保存
+            lastFile = e.target.files[0];
+            readFile(lastFile);
         }
     });
-}
+    
+    document.getElementById('reloadButton').addEventListener('click', function() {
+        if (lastFile) {
+            // リロードボタンが押されたとき、最後に選択されたファイルを再読み込み
+            readFile(lastFile);
+        } else {
+            alert("ファイルがまだ選択されていません。");
+        }
+    });}
 
 function draw() {
     clear();

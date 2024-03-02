@@ -17,10 +17,17 @@ window.updateSliderValue = function(value) {
 };
 
 function setup() {
-    createCanvas(800, 800).parent('canvasContainer'); // キャンバスの親要素を設定
-    noLoop();
+    createCanvas(800, 800, WEBGL).parent('canvasContainer'); // キャンバスの親要素を設定
+    loop();
 
-    // ファイル入力処理
+     // 'フォルダを読み込む' ボタンのクリックイベントを設定
+  document.getElementById('loadFolderButton').addEventListener('click', function() {
+    document.getElementById('fileInput').click(); // 実際のファイル入力をトリガー
+  });
+  
+  document.getElementById('fileInput').addEventListener('change', handleFileSelect);
+
+/*
     document.getElementById('fileInput').addEventListener('change', function(e) {
         if (e.target.files.length > 0) {
             // ファイルが選択されたとき、そのファイルを保存
@@ -28,6 +35,7 @@ function setup() {
             readFile(lastFile);
         }
     });
+*/
 
     document.getElementById('fileInput').addEventListener('click', function(e) {
         this.value = null;
@@ -74,9 +82,36 @@ function setup() {
     });
 }
 
+function handleFileSelect(event) {
+    const files = event.target.files; // 選択されたファイルのリスト
+    const fileListContainer = document.getElementById('fileListContainer');
+    fileListContainer.innerHTML = ''; // リストをクリア
+
+    // ファイルリストを表示
+    for (const file of files) {
+        const btn = document.createElement('button');
+        btn.textContent = file.name;
+        btn.addEventListener('click', () => loadAndDraw(file));
+        fileListContainer.appendChild(btn);
+    }
+}
+
+function loadAndDraw(file) {
+    // FileReaderを使用してファイルの内容を読み込み
+    const reader = new FileReader();
+    reader.onload = function(event) {
+        const content = event.target.result;
+        // ファイルの内容から描画コマンドを実行する処理をここに記述
+        console.log(content); // とりあえずコンテンツをログに出力
+    };
+    reader.readAsText(file);
+}
+
 function draw() {
     clear();
     background('white');
+    rotateX(frameCount * 0.01);
+    rotateY(frameCount * 0.01);
 
     if (playing) {
         loop();

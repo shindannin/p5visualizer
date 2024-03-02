@@ -11,7 +11,7 @@ sketch.js内のevalを使用しているので**任意コードが実行でき�
 * p5.jsに準拠しているので、それなりに機能も豊富。
 
 ### コードの例
-![image](https://github.com/shindannin/p5visualizer/assets/8682966/90549c16-58ed-49e3-97df-5945245f150b)
+![image](https://github.com/shindannin/p5visualizer/assets/8682966/6c90c405-d893-48eb-8c66-2e3aa08903db)
 
 ### ビジュアライズの例
 ![image](https://github.com/shindannin/p5visualizer/assets/8682966/e4837fad-0408-41c2-9cf5-0711cef2af3a)

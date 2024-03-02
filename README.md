@@ -2,7 +2,7 @@
 競プロ用。C++コードに描画コマンドを埋め込み、ファイルを出力し、それをブラウザ上で表示させる
 
 ## 使用上の注意
-- sketch.js内でevalを実行しているので、任意コードが実行できます。ローカル・プライベートでの使用に留めておいてください。
+- sketch.js内でevalを実行しているので、任意コードが実行できるので誰でも使える場所に置くのは危険です！ローカルやプライベートでの使用に留めておいてください。
 - C++マクロを使っているので、他の関数名と衝突等のアクシデントが発生する可能性があります。適宜対応してください。
 
 ## 特徴
@@ -45,18 +45,24 @@ https://p5js.org/reference/ の一部の描画命令をサポートしている�
 * triangle(x1,y1,x2,y2,x3,y3)
 
 ### スタイル指定
-* background(r, g, b)
+* background(gray, alpha = 255)
+* background(r, g, b, a)
+* background(colorName)
 * clear()
 * colorMode(mode, max1, max2, max3, maxA)
+* fill(gray, alpha = 255)
 * fill(r, g, b, a)
+* fill(colorName)
 * noFill()
 * noStroke()
-* stroke(r, g, b, a)
+* stroke(gray, alpha = 255)
+* stroke(r, g, b, alpha = 255)
+* stroke(colorName)
 * erase()
 * noErase()
 
 ### テキスト描画
-* textAlign(alignX, alignY)
+* textAlign(alignX, alignY="")
 * textLeading(leading)
 * textSize(size)
 * textStyle(style)
@@ -65,6 +71,7 @@ https://p5js.org/reference/ の一部の描画命令をサポートしている�
 * textDescent()
 * textWrap(wrap)
 * text(str, x, y)
+* textFont(fontName)
 
 ## サンプル
 AHC009 ( https://atcoder.jp/contests/ahc009 ) に提出可能

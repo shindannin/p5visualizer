@@ -18,12 +18,14 @@
 ![image](https://github.com/shindannin/p5visualizer/assets/8682966/e4837fad-0408-41c2-9cf5-0711cef2af3a)
 
 ## 使用方法
-1. 自分のmain.cppに、macro.cppを挿入する。
-2. main.cppに描画コマンドを書いていく。
-3. 実行時にVisCommands.txtが出力される
+1. 自分のコードに、macro.cppを挿入する。
+2. 描画コマンドを書いていく。
+3. 自分のコードを実行すると、ファイルVisCommands.txtが出力される
 4. ビジュアライザindex.htmlをブラウザで開く
-5. 「ファイルを選択」で先ほどのVisCommands.txtを開く
+5. 「ファイル」で先ほど出力されたVisCommands.txtを開く
 6. 表示される。時間のスライダーで表示させたい時間を選べる
+
+※自分のコードを提出するときは、#define VISUALIZE をコメントアウトしてください。
 
 ## 描画
 https://p5js.org/reference/ の一部の描画命令をサポートしている。なお、https://editor.p5js.org/ にウェブ版のエディタがあるので、描画コマンドがおかしいときはここでも確認できる。
@@ -81,6 +83,5 @@ AHC009 ( https://atcoder.jp/contests/ahc009 ) に提出可能
 ## TODO
 * 時間の範囲指定（追加しようか迷う…）
 * 入力・出力などテキストを表示させるためのテキストボックス
-* 関数名そのままで本当にいいのか？衝突事故がおきそう。
 * push, popなど名前の衝突が起きそうだけど使えそうな関数をどうするか？
 * 3D描画

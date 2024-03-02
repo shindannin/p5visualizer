@@ -12,10 +12,10 @@
 * p5.jsに準拠しているので、それなりに機能も豊富
 
 ### コードの例
-![image](https://github.com/shindannin/p5visualizer/assets/8682966/e6c0f8a0-d079-4e4e-b352-a9ffc9f6533c)
+![image](https://github.com/shindannin/p5visualizer/assets/8682966/90549c16-58ed-49e3-97df-5945245f150b)
 
 ### ビジュアライズの例
-![image](https://github.com/shindannin/p5visualizer/assets/8682966/3169e0d4-020b-40a7-9869-76b2ebb157eb)
+![image](https://github.com/shindannin/p5visualizer/assets/8682966/e4837fad-0408-41c2-9cf5-0711cef2af3a)
 
 ## 使用方法
 1. 自分のmain.cppに、macro.cppを挿入する。

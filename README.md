@@ -26,11 +26,11 @@ sketch.js内のevalを使用しているので**任意コードが実行でき�
 
 ※自分のコードを提出するときは、#define VISUALIZE をコメントアウトしてください。
 
-## 描画
-https://p5js.org/reference/ の一部の描画命令をサポートしている。なお、https://editor.p5js.org/ にウェブ版のエディタがあるので、描画コマンドがおかしいときはここでも確認できる。
+## 描画命令一覧
+詳細は https://p5js.org/reference を見てください。なお、https://editor.p5js.org/ にウェブ版のエディタがあるので、描画コマンドがおかしいときはここでも確認できます。
 
 ### 時間命令
- ここで指定した時間は再変更するまで全ての描画で使用される。
+p5.jsにないオリジナルの命令です。ここで指定した時間は再変更するまで全ての描画で使用される。
 * time(t) スライダーで時間指定したときに表示される時間を指定する。
 * always(t) スライダーの時間を無視し、いつでも表示される。
 
@@ -44,6 +44,26 @@ https://p5js.org/reference/ の一部の描画命令をサポートしている�
 * rect(x,y,w,h)
 * square(x,y,s)
 * triangle(x1,y1,x2,y2,x3,y3)
+
+### 属性
+ellipseMode(mode)
+noSmooth()
+rectMode(mode)
+smooth()
+strokeCap(cap)
+strokeJoin(join) 
+strokeWeight(weight)
+
+### カーブ
+bezier(x1, y1, x2, y2, x3, y3, x4, y4)
+bezierDetail(detail)
+bezierPoint(a, b, c, d, t)
+bezierTangent(a, b, c, d, t) 
+curve(x1, y1, x2, y2, x3, y3, x4, y4)
+curveDetail(detail)
+curveTightness(tightness)
+curvePoint(a, b, c, d, t)
+curveTangent(a, b, c, d, t)
 
 ### スタイル指定
 * background(gray, alpha = 255)
@@ -61,6 +81,10 @@ https://p5js.org/reference/ の一部の描画命令をサポートしている�
 * stroke(colorName)
 * erase()
 * noErase()
+
+### 描画スタイルや属性の一時退避
+* push()
+* pop()
 
 ### テキスト描画
 * textAlign(alignX, alignY="")

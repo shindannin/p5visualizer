@@ -46,13 +46,13 @@ p5.jsにないオリジナルの命令です。ここで指定した時間は再
 * triangle(x1,y1,x2,y2,x3,y3)
 
 ### 属性
-ellipseMode(mode)
-noSmooth()
-rectMode(mode)
-smooth()
-strokeCap(cap)
-strokeJoin(join) 
-strokeWeight(weight)
+* ellipseMode(mode)
+* noSmooth()
+* rectMode(mode)
+* smooth()
+* strokeCap(cap)
+* strokeJoin(join) 
+* strokeWeight(weight)
 
 ### カーブ
 * bezier(x1, y1, x2, y2, x3, y3, x4, y4)
